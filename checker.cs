@@ -53,8 +53,8 @@ class Checker
         }
     }
     static int Main() {
-        ExpectTrue(batteryTempIsOk(25) && batterySocIsOk(70) && batteryChargeRateIsOk(0.7f));
-        ExpectFalse(batteryTempIsOk(50) && batterySocIsOk(85) && batteryChargeRateIsOk(0.0f));
+        ExpectTrue((batteryTempIsOk(25) && batterySocIsOk(70) && batteryChargeRateIsOk(0.7f)));
+        ExpectFalse((batteryTempIsOk(50) && batterySocIsOk(85) && batteryChargeRateIsOk(0.0f)));
         Console.WriteLine("All ok");
         return 0;
     }
