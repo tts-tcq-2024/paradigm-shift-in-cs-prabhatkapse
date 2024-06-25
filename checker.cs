@@ -60,7 +60,7 @@ class Checker
                 
     static int Main() {
         ExpectTrue(batteryCondition(25, 70, 0.7f));
-        ExpectTrue(batteryCondition(50, 85, 0.0f));
+        ExpectFalse(batteryCondition(50, 85, 0.0f));
         Console.WriteLine("All ok");
         return 0;
     }
