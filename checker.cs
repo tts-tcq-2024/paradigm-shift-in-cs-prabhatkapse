@@ -53,13 +53,14 @@ class Checker
         }
     }
 
-    static bool batteryCondition(float temp, float soc, float chargeRate){
-        return (batteryTempIsOk(temp) && batterySocIsOk(soc) && batteryChargeRateIsOk(chargeRate);
+    static bool batteryCondition(float temp, float soc, float chargeRate)
+    {
+        return batteryTempIsOk(temp) && batterySocIsOk(soc) && batteryChargeRateIsOk(chargeRate);
     }
                 
     static int Main() {
-        ExpectTrue(batteryCondition(temp = 25, soc= 70, chargeRate= 0.7f));
-        ExpectTrue(batteryCondition(temp = 50, soc= 85, chargeRate= 0.0f));
+        ExpectTrue(batteryCondition(25, 70, 0.7f));
+        ExpectTrue(batteryCondition(50, 85, 0.0f));
         Console.WriteLine("All ok");
         return 0;
     }
