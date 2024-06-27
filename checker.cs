@@ -4,6 +4,11 @@ namespace paradigm_shift_csharp
 {
 class Checker
 {
+    static bool batteryIsOk(float temp, float soc, float chargeRate)
+    {
+        return batteryTempIsOk(temp) && batterySocIsOk(soc) && batteryChargeRateIsOk(chargeRate);
+    }
+       
     static bool batteryTempIsOk(float temperature) 
     {
         if (temperature < 0 || temperature > 45) 
@@ -53,14 +58,10 @@ class Checker
         }
     }
 
-    static bool batteryCondition(float temp, float soc, float chargeRate)
-    {
-        return batteryTempIsOk(temp) && batterySocIsOk(soc) && batteryChargeRateIsOk(chargeRate);
-    }
-                
+         
     static int Main() {
-        ExpectTrue(batteryCondition(25, 70, 0.7f));
-        ExpectFalse(batteryCondition(50, 85, 0.0f));
+        ExpectTrue(batteryIsOk(25, 70, 0.7f));
+        ExpectFalse(batteryIsOk(50, 85, 0.0f));
         Console.WriteLine("All ok");
         return 0;
     }
