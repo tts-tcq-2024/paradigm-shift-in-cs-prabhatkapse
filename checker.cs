@@ -4,26 +4,38 @@ namespace paradigm_shift_csharp
 {
 class Checker
 {
-    static bool batteryIsOk(float temp, float soc, float chargeRate)
+    #region helper function
+    static bool valueRangeCheck(object minValue, object maxValue, object value)
     {
-        return batteryTempIsOk(temp) && batterySocIsOk(soc) && batteryChargeRateIsOk(chargeRate);
+        if (value < minValue || value > maxValue)
+        {
+            return false; // Value is not in the given range
+        }
+
+        return true; // Value is in the given range
+    }
+    #end_region
+    
+    static bool batteryIsOk(batteryIsOk(float minTemp, float maxTemp, float temp, float minSoc, float maxSoc, float soc, float maxChargeRate, float chargeRate))
+    {
+        return batteryTempIsOk(minTemp, maxTemp, temp) && batterySocIsOk(minSoc, maxSoc, soc) && batteryChargeRateIsOk(maxChargeRate, chargeRate);
     }
        
-    static bool batteryTempIsOk(float temperature) 
+    static bool batteryTempIsOk(float minTemp, float maxTemp, float temp) 
     {
-        if (temperature < 0 || temperature > 45) 
+        if !(valueRangeCheck(minTemp, maxTemp, temp))
         {
             Console.WriteLine("Temperature is out of range!");
             return false;
         }
-        
+            
         return true;
     }
 
-    static bool batterySocIsOk(float soc) 
+    static bool batterySocIsOk(float minSoc, float maxSoc, float soc) 
     {
 
-        if (soc < 20 || soc > 80) 
+        if !(valueRangeCheck(minSoc, maxSoc, soc))
         {
             Console.WriteLine("State of Charge is out of range!");
             return false;
@@ -32,10 +44,10 @@ class Checker
         return true;
     }
 
-    static bool batteryChargeRateIsOk(float chargeRate) 
+    static bool batteryChargeRateIsOk(float maxChargeRate, float chargeRate) 
     {
 
-        if (chargeRate > 0.8) 
+        if (chargeRate > maxChargeRate) 
         {
             Console.WriteLine("Charge Rate is out of range!");
             return false;
@@ -60,8 +72,26 @@ class Checker
 
          
     static int Main() {
-        ExpectTrue(batteryIsOk(25, 70, 0.7f));
-        ExpectFalse(batteryIsOk(50, 85, 0.0f));
+        //Battery Temperature
+        float minTemp = 0;
+        float maxTemp = 45;
+        float temp = 25;
+        //Battery SOC
+        float minSoc = 20;
+        float maxSoc = 80;
+        float soc = 70;
+        //Battery Charge Rate
+        float maxChargeRate = 0.8;
+        float chargeRate = 0.7f;
+            
+        ExpectTrue(batteryIsOk(minTemp, maxTemp, temp, minSoc, maxSoc, soc, maxChargeRate, chargeRate));
+
+        temp = 50;
+        soc = 85;
+        chargeRate = 0.0f;
+        
+        ExpectFalse(batteryIsOk(minTemp, maxTemp, temp, minSoc, maxSoc, soc, maxChargeRate, chargeRate));
+        
         Console.WriteLine("All ok");
         return 0;
     }
