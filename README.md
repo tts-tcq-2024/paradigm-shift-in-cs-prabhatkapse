@@ -19,6 +19,7 @@ Electric Vehicles have BMS - Battery Management Systems
 - Protect batteries while charging:
 at home, in public place, within vehicle / regenerative braking
 - Estimate life, inventory and supply chains
+- Get Early warning and alarm state
 
 ## The Starting Point
 
@@ -28,6 +29,7 @@ We will explore the charging phase of Li-ion batteries to start with.
 
 - The code here has high complexity in a single function.
 - The tests are not complete - they do not cover all the needs of a consumer
+- Customers need early warnings to take action, in addition to the alarm that you print after the limit is breached. Introduce a 'warning' level with a tolerance of 5% of the upper-limit.
 
 ## Tasks
 
@@ -50,6 +52,7 @@ Can we add new functionality without disturbing the old?
 - Technology changes due to obsolescence
 - Sensors may be from different vendors with different accuracy
 - Predicting the future requires Astrology!
+- Though we are starting with warning levels for all parameters, customers may give feedback to have warnings only for some parameters and not others. Minimize the change needed for such 'tuning'. 
 
 ## Keep it Simple
 
