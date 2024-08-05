@@ -39,7 +39,7 @@ namespace paradigm_shift_csharp
             Console.WriteLine("TP3: Warning Configuration Check");
 
             battery.ConfigureWarning(true, false, true);
-            Utils.StatusCompare(battery.GetStateStatus(), "Battery status: LOW_TEMPERATURE_WARNING, , HIGH_CHARGE_RATE_BREACH");
+            Utils.StatusCompare(battery.GetStateStatus(), "Battery status: LOW_TEMPERATURE_WARNING, INVALID, HIGH_CHARGE_RATE_BREACH");
         }
 
     }
