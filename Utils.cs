@@ -21,6 +21,14 @@ namespace paradigm_shift_csharp
                 Console.WriteLine("Expected false, but got true");
             }
         }
+
+        public static void StatusCompare(string actualString, string expectedString)
+        {
+            if (String.Equals(actualString, expectedString))
+                Console.WriteLine($"Battery Status is as expected");
+            else
+                Console.WriteLine($"Battery Status is not as expected: {actualString}");
+        }
     }
 
 
