@@ -43,7 +43,7 @@ namespace paradigm_shift_csharp
         {
             foreach (var temp in stateList)
             {
-                if (Utils.IsInRange(value, temp.Key.Item1, temp.Key.Item2) && (warning || !(temp.Value.Contains("WARNING"))))
+                if (Utils.IsInRange(value, temp.Key.Item1, temp.Key.Item2) && IsWarningRequired(temp.Value))
                 {
                     return temp.Value;
                 }
@@ -51,6 +51,11 @@ namespace paradigm_shift_csharp
             return "INVALID";
         }
 
+        private bool IsWarningRequired(string state)
+        {
+            return warning || !state.Contains(WARNING);
+        }
+        
         public void ConfigureWarning(bool input)
         {
             warning = input;
