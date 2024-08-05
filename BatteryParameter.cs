@@ -53,7 +53,7 @@ namespace paradigm_shift_csharp
 
         private bool IsWarningRequired(string state)
         {
-            return warning || !state.Contains(WARNING);
+            return warning || !state.Contains("WARNING");
         }
         
         public void ConfigureWarning(bool input)
