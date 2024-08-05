@@ -43,14 +43,11 @@ namespace paradigm_shift_csharp
         {
             foreach (var temp in stateList)
             {
-                if (Utils.IsInRange(value, temp.Key.Item1, temp.Key.Item2))
+                if (!warning && (temp.Value.Contains("WARNING")))
                 {
-                    if (!warning && (temp.Value.Contains("WARNING")))
-                    {
-                        continue;
-                    }
-                    return temp.Value;
+                    continue;
                 }
+                return temp.Value;
             }
             return "INVALID";
         }
