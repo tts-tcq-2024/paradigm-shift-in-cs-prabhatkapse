@@ -49,8 +49,8 @@ namespace paradigm_shift_csharp
                     {
                         continue;
                     }
+                    return temp.Value;
                 }
-                return temp.Value;
             }
             return "INVALID";
         }
