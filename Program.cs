@@ -25,25 +25,21 @@ namespace paradigm_shift_csharp
 
             battery = new BatterySystem(minTemp, maxTemp, temp, minSoc, maxSoc, soc, maxChargeRate, chargeRate);
             Utils.ExpectTrue(battery.IsOk());
-            if (String.Equals(battery.GetStateStatus(), "Battery status: NORMAL_TEMPERATURE_STATE, NORMAL_SOC_STATE, NORMAL_CHARGE_RATE_STATE"))
-                Console.WriteLine($"TP1: Passed, {battery.GetStateStatus()}");
-            else
-                Console.WriteLine($"TP1: Fails, {battery.GetStateStatus()}");
-
+            Utils.StatusCompare(battery.GetStateStatus(), "Battery status: NORMAL_TEMPERATURE_STATE, NORMAL_SOC_STATE, NORMAL_CHARGE_RATE_STATE");
 
             Console.WriteLine("TP2: Battery Condition is not good");
-
             temp = 2;
             soc = 77;
             chargeRate = 0.9f;
 
             battery = new BatterySystem(minTemp, maxTemp, temp, minSoc, maxSoc, soc, maxChargeRate, chargeRate);
             Utils.ExpectFalse(battery.IsOk());
-            battery.ConfigureWarning(true, true, false);
-            if (String.Equals(battery.GetStateStatus(), "Battery status: LOW_TEMPERATURE_WARNING, HIGH_SOC_WARNING, HIGH_CHARGE_RATE_BREACH"))
-                Console.WriteLine($"TP2: Passed, {battery.GetStateStatus()}");
-            else
-                Console.WriteLine($"TP1: Fails, {battery.GetStateStatus()}");
+            Utils.StatusCompare(battery.GetStateStatus(), "Battery status: LOW_TEMPERATURE_WARNING, HIGH_SOC_WARNING, HIGH_CHARGE_RATE_BREACH");
+
+            Console.WriteLine("TP3: Warning Configuration Check");
+
+            battery.ConfigureWarning(true, false, true);
+            Utils.StatusCompare(battery.GetStateStatus(), "Battery status: LOW_TEMPERATURE_WARNING, , HIGH_CHARGE_RATE_BREACH");
         }
 
     }
